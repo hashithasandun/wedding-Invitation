@@ -150,41 +150,61 @@ html {
     border-left: none;
 }
 
-/* Content layout on door halves */
+/* Content layout on door halves - absolute sizing and alignment to prevent overlapping name segments */
 .welcome-content-left,
 .welcome-content-right {
     width: 100%;
-    text-align: center;
     z-index: 4;
     transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s ease;
+    box-sizing: border-box;
 }
 
 .welcome-content-left {
-    padding-right: 5px;
+    text-align: right;
+    padding-right: 20px;
 }
 
 .welcome-content-right {
-    padding-left: 5px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 .welcome-subtitle {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     letter-spacing: 0.05em;
 }
 
 .welcome-names-left,
 .welcome-names-right {
     font-family: var(--font-serif);
-    font-size: 4rem;
+    font-size: 2.8rem; /* Scaled down for mobile view */
     font-weight: 300;
     color: var(--accent-gold);
-    letter-spacing: 0.05em;
-    line-height: 1.2;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Add media query for slightly larger screens to scale font back up */
+@media (min-width: 480px) {
+    .welcome-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    .welcome-names-left,
+    .welcome-names-right {
+        font-size: 3.8rem;
+    }
+    .welcome-content-left {
+        padding-right: 30px;
+    }
+    .welcome-content-right {
+        padding-left: 30px;
+    }
 }
 
 /* Trigger Button Container */
@@ -195,23 +215,34 @@ html {
     transform: translate(-50%, -50%);
     z-index: 10;
     transition: opacity 0.8s ease, transform 0.8s ease;
+    width: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-open {
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.75rem; /* Scaled down slightly for mobile viewport safety */
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     color: var(--white);
     background-color: var(--accent-gold);
     border: 3px solid var(--bg-cream);
-    padding: 18px 45px;
+    padding: 14px 32px; /* Balanced padding to prevent overlap with names */
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(184, 154, 91, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(184, 154, 91, 0.3);
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+    .btn-open {
+        font-size: 0.85rem;
+        letter-spacing: 0.25em;
+        padding: 18px 45px;
+    }
 }
 
 .btn-open:hover {
