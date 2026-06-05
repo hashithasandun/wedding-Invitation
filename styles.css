@@ -1,4 +1,6 @@
-/* Design System & Reset */
+/* ==========================================================================
+   1. Design System & Reset
+   ========================================================================== */
 :root {
     --bg-cream: #FDFBF7;
     --primary-rose: #ebdcd5;
@@ -29,9 +31,9 @@ html {
     scroll-behavior: smooth;
 }
 
-
-
-/* Welcome Gate / Fullscreen Overlay */
+/* ==========================================================================
+   2. Welcome Gate / Fullscreen Overlay
+   ========================================================================== */
 .welcome-gate {
     position: fixed;
     top: 0;
@@ -45,7 +47,6 @@ html {
     transition: visibility 1s ease-in-out;
 }
 
-/* Background image revealed when doors open - WOW Look with zoom & bloom focus */
 .welcome-bg-image-wrapper {
     position: absolute;
     top: 0;
@@ -73,7 +74,6 @@ html {
     object-fit: cover;
 }
 
-/* Elegant radial gold glow overlay on top of background image */
 .welcome-bg-image-wrapper::after {
     content: '';
     position: absolute;
@@ -85,7 +85,9 @@ html {
     pointer-events: none;
 }
 
-/* Door Styles - Rich Elegant Pearl Silk Gradient & Smooth Slide */
+/* ==========================================================================
+   3. Split Doors Setup
+   ========================================================================== */
 .door {
     position: absolute;
     top: 0;
@@ -112,19 +114,20 @@ html {
     transform-origin: right center;
 }
 
-/* Inner frame panel inside doors for classic elegant look */
 .door-inner {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 36vh;
+    /* FIX: Names vertically perfect alignment */
     position: relative;
-    padding: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
 }
 
-/* Gold double borders on door panels */
 .door::before {
     content: '';
     position: absolute;
@@ -150,7 +153,9 @@ html {
     border-left: none;
 }
 
-/* Content layout on door halves - absolute sizing and alignment to prevent overlapping name segments */
+/* ==========================================================================
+   4. Overlay Typography & Spacing
+   ========================================================================== */
 .welcome-content-left,
 .welcome-content-right {
     width: 100%;
@@ -161,12 +166,12 @@ html {
 
 .welcome-content-left {
     text-align: right;
-    padding-right: 20px;
+    padding-right: 12px;
 }
 
 .welcome-content-right {
     text-align: left;
-    padding-left: 20px;
+    padding-left: 12px;
 }
 
 .welcome-subtitle {
@@ -181,7 +186,8 @@ html {
 .welcome-names-left,
 .welcome-names-right {
     font-family: var(--font-serif);
-    font-size: 2.8rem; /* Scaled down for mobile view */
+    font-size: 2.4rem;
+    /* FIX: Prevent text cutting & overlapping on shorter screens */
     font-weight: 300;
     color: var(--accent-gold);
     letter-spacing: 0.02em;
@@ -189,30 +195,33 @@ html {
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
-/* Add media query for slightly larger screens to scale font back up */
 @media (min-width: 480px) {
     .welcome-subtitle {
         font-size: 1.3rem;
         margin-bottom: 12px;
     }
+
     .welcome-names-left,
     .welcome-names-right {
         font-size: 3.8rem;
     }
+
     .welcome-content-left {
         padding-right: 30px;
     }
+
     .welcome-content-right {
         padding-left: 30px;
     }
 }
 
-/* Trigger Button Container - Positioned higher (top of the middle) to stay clear of names */
+/* Trigger Button Container - Fixed Overlay Placement */
 .open-trigger-container {
     position: absolute;
-    top: 40%;
+    top: 72%;
+    /* FIX: Moved lower to fully uncover Yama & Nipu */
     left: 50%;
-    transform: translate(-50%, -40%);
+    transform: translate(-50%, -72%);
     z-index: 10;
     transition: opacity 0.8s ease, transform 0.8s ease;
     width: auto;
@@ -222,14 +231,14 @@ html {
 
 .btn-open {
     font-family: var(--font-sans);
-    font-size: 0.75rem; /* Scaled down slightly for mobile viewport safety */
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--white);
     background-color: var(--accent-gold);
     border: 3px solid var(--bg-cream);
-    padding: 14px 32px; /* Balanced padding to prevent overlap with names */
+    padding: 14px 32px;
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(184, 154, 91, 0.3);
@@ -251,7 +260,7 @@ html {
     box-shadow: 0 12px 35px rgba(197, 160, 89, 0.4);
 }
 
-/* Door opening actions - Split & slide with smooth color transition */
+/* Door Opening Animations */
 .welcome-gate.open .door-left {
     transform: translateX(-100%);
     background: linear-gradient(135deg, #ecdccb 0%, #e0c8b2 100%);
@@ -288,7 +297,9 @@ html {
     pointer-events: none;
 }
 
-/* Main Container */
+/* ==========================================================================
+   5. Main App Layout & Media
+   ========================================================================== */
 .main-content {
     opacity: 0;
     transform: translateY(20px);
@@ -301,7 +312,6 @@ html {
     transform: translateY(0);
 }
 
-/* Floating Music Control */
 .music-toggle {
     position: fixed;
     bottom: 30px;
@@ -332,7 +342,7 @@ html {
     animation: rotateMusic 4s linear infinite;
 }
 
-/* Hero Section */
+/* Hero Elements */
 .hero {
     min-height: 90vh;
     display: flex;
@@ -383,9 +393,7 @@ html {
     max-width: 320px;
     width: 100%;
     aspect-ratio: 1 / 1.5;
-    /* Vertical arched frame ratio */
     border-radius: 160px 160px 0 0;
-    /* Vertical archway shape */
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(184, 154, 91, 0.15);
     border: 6px solid var(--white);
@@ -399,7 +407,9 @@ html {
     object-fit: cover;
 }
 
-/* Details Section */
+/* ==========================================================================
+   6. Content Sections & Modals
+   ========================================================================== */
 .details {
     padding: 40px 20px;
     display: flex;
@@ -407,14 +417,29 @@ html {
 }
 
 .card {
-    background-color: var(--white);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    position: relative;
     border-radius: var(--border-radius);
     padding: 45px 30px;
     max-width: 500px;
     width: 100%;
     box-shadow: var(--shadow);
     text-align: center;
-    border: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px dashed rgba(197, 160, 89, 0.35);
+    border-radius: calc(var(--border-radius) - 10px);
+    pointer-events: none;
 }
 
 .section-title {
@@ -502,7 +527,7 @@ html {
     box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
 }
 
-/* Countdown Section */
+/* Countdown Blocks */
 .countdown-section {
     padding: 60px 20px;
     text-align: center;
@@ -517,11 +542,13 @@ html {
 }
 
 .countdown-box {
-    background-color: var(--white);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    box-shadow: 0 8px 25px rgba(197, 160, 89, 0.05);
     border-radius: var(--border-radius);
     padding: 20px 10px;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(197, 160, 89, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -550,7 +577,7 @@ html {
     color: var(--text-muted);
 }
 
-/* Footer */
+/* Footer Section */
 .footer {
     text-align: center;
     padding: 80px 20px 40px;
@@ -573,190 +600,7 @@ html {
     margin-top: 15px;
 }
 
-/* Animations */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes rotateMusic {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Scroll reveal styling */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.scroll-reveal.reveal-active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Media Queries for Screens Bigger than Mobile */
-@media (min-width: 600px) {
-    .initials {
-        font-size: 6.5rem;
-    }
-
-    .couple-names {
-        font-size: 4.5rem;
-    }
-
-    .card {
-        padding: 55px 45px;
-    }
-
-    .countdown-container {
-        gap: 20px;
-    }
-
-    .time-num {
-        font-size: 2.8rem;
-    }
-
-    .time-label {
-        font-size: 0.75rem;
-    }
-}
-
-/* Petals Container */
-.petals-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-    overflow: hidden;
-}
-
-/* Petal Base Styles */
-.petal {
-    position: absolute;
-    top: -20px;
-    border-radius: 150% 0 150% 50% / 150% 0 150% 50%;
-    animation: fall linear forwards, sway ease-in-out infinite alternate;
-}
-
-/* Petal Types */
-.petal-1 {
-    background: linear-gradient(135deg, rgba(244, 219, 216, 0.75), rgba(235, 192, 187, 0.55));
-    border-radius: 50% 0 50% 50%;
-}
-
-.petal-2 {
-    background: linear-gradient(135deg, rgba(230, 175, 170, 0.8), rgba(214, 145, 139, 0.6));
-    border-radius: 60% 10% 60% 40%;
-}
-
-.petal-3 {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 222, 219, 0.7));
-    border-radius: 50%;
-}
-
-/* Petals Animations */
-@keyframes fall {
-    0% {
-        top: -5%;
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    90% {
-        opacity: 0.9;
-    }
-
-    100% {
-        top: 105%;
-        opacity: 0;
-    }
-}
-
-@keyframes sway {
-    0% {
-        margin-left: 0px;
-        transform: rotate(0deg) rotateY(0deg);
-    }
-
-    100% {
-        margin-left: 50px;
-        transform: rotate(180deg) rotateY(180deg);
-    }
-}
-
-/* Premium Card Upgrades */
-.card {
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(197, 160, 89, 0.2);
-    position: relative;
-}
-
-/* Elegant Inner Double Border for Details Card */
-.card::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 1px dashed rgba(197, 160, 89, 0.35);
-    border-radius: calc(var(--border-radius) - 10px);
-    pointer-events: none;
-}
-
-/* Gold/Champagne Heading Styles */
-.welcome-names,
-.couple-names,
-.section-title,
-.celebration-title {
-    font-family: var(--font-serif);
-    color: var(--accent-gold);
-    background: none;
-    -webkit-background-clip: initial;
-    background-clip: initial;
-    -webkit-text-fill-color: initial;
-}
-
-.hero-header {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-/* Countdown Upgrade */
-.countdown-box {
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(197, 160, 89, 0.25);
-    box-shadow: 0 8px 25px rgba(197, 160, 89, 0.05);
-}
-
-/* Calendar Modal Styling */
+/* Calendar Modal Structure */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -799,7 +643,6 @@ html {
     transform: scale(1) translateY(0);
 }
 
-/* Double dashed border for consistency */
 .modal-card::before {
     content: '';
     position: absolute;
@@ -912,4 +755,154 @@ html {
 
 .btn-cancel:hover {
     color: var(--text-dark);
+}
+
+/* ==========================================================================
+   7. Fall-Petals Keyframes & Shared Core Keyframes
+   ========================================================================== */
+.petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    top: -20px;
+    border-radius: 150% 0 150% 50% / 150% 0 150% 50%;
+    animation: fall linear forwards, sway ease-in-out infinite alternate;
+}
+
+.petal-1 {
+    background: linear-gradient(135deg, rgba(244, 219, 216, 0.75), rgba(235, 192, 187, 0.55));
+    border-radius: 50% 0 50% 50%;
+}
+
+.petal-2 {
+    background: linear-gradient(135deg, rgba(230, 175, 170, 0.8), rgba(214, 145, 139, 0.6));
+    border-radius: 60% 10% 60% 40%;
+}
+
+.petal-3 {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 222, 219, 0.7));
+    border-radius: 50%;
+}
+
+@keyframes fall {
+    0% {
+        top: -5%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.9;
+    }
+
+    100% {
+        top: 105%;
+        opacity: 0;
+    }
+}
+
+@keyframes sway {
+    0% {
+        margin-left: 0px;
+        transform: rotate(0deg) rotateY(0deg);
+    }
+
+    100% {
+        margin-left: 50px;
+        transform: rotate(180deg) rotateY(180deg);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateMusic {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Global Gold Override */
+.welcome-names,
+.couple-names,
+.section-title,
+.celebration-title {
+    font-family: var(--font-serif);
+    color: var(--accent-gold);
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: initial;
+}
+
+.hero-header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==========================================================================
+   8. Media Queries (Desktop Support)
+   ========================================================================== */
+@media (min-width: 600px) {
+    .initials {
+        font-size: 6.5rem;
+    }
+
+    .couple-names {
+        font-size: 4.5rem;
+    }
+
+    .card {
+        padding: 55px 45px;
+    }
+
+    .countdown-container {
+        gap: 20px;
+    }
+
+    .time-num {
+        font-size: 2.8rem;
+    }
+
+    .time-label {
+        font-size: 0.75rem;
+    }
 }
