@@ -86,7 +86,7 @@ html {
 }
 
 /* ==========================================================================
-   3. Split Doors Setup
+   3. Split Doors Setup & Spacing Fixed
    ========================================================================== */
 .door {
     position: absolute;
@@ -120,8 +120,8 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 36vh;
-    /* FIX: Names vertically perfect alignment */
+    padding-top: 39vh;
+    /* FIX: Pushed slightly lower to sit beautifully below centered subtitle */
     position: relative;
     padding-left: 20px;
     padding-right: 20px;
@@ -154,8 +154,30 @@ html {
 }
 
 /* ==========================================================================
-   4. Overlay Typography & Spacing
+   4. Screen Centered Overlay Elements & Typography
    ========================================================================== */
+.welcome-subtitle-container {
+    position: absolute;
+    top: 28vh;
+    /* FIX: Holds 'The Wedding Of' centrally right above names tracking */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.welcome-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
 .welcome-content-left,
 .welcome-content-right {
     width: 100%;
@@ -174,20 +196,10 @@ html {
     padding-left: 12px;
 }
 
-.welcome-subtitle {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-}
-
 .welcome-names-left,
 .welcome-names-right {
     font-family: var(--font-serif);
     font-size: 2.4rem;
-    /* FIX: Prevent text cutting & overlapping on shorter screens */
     font-weight: 300;
     color: var(--accent-gold);
     letter-spacing: 0.02em;
@@ -195,10 +207,27 @@ html {
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
+.welcome-ampersand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    visibility: hidden;
+    /* Balanced alignment across main layout */
+}
+
 @media (min-width: 480px) {
     .welcome-subtitle {
         font-size: 1.3rem;
-        margin-bottom: 12px;
+    }
+
+    .welcome-subtitle-container {
+        top: 26vh;
+    }
+
+    .door-inner {
+        padding-top: 37vh;
     }
 
     .welcome-names-left,
@@ -215,11 +244,10 @@ html {
     }
 }
 
-/* Trigger Button Container - Fixed Overlay Placement */
+/* Trigger Button Container - Lower Tracking Viewport */
 .open-trigger-container {
     position: absolute;
     top: 72%;
-    /* FIX: Moved lower to fully uncover Yama & Nipu */
     left: 50%;
     transform: translate(-50%, -72%);
     z-index: 10;
@@ -260,7 +288,7 @@ html {
     box-shadow: 0 12px 35px rgba(197, 160, 89, 0.4);
 }
 
-/* Door Opening Animations */
+/* Door Opening Transitions */
 .welcome-gate.open .door-left {
     transform: translateX(-100%);
     background: linear-gradient(135deg, #ecdccb 0%, #e0c8b2 100%);
@@ -289,6 +317,12 @@ html {
 .welcome-gate.open .welcome-content-right {
     opacity: 0;
     transform: translateX(50px);
+}
+
+/* FIX: Fades subtitle cleanly together with doors transition */
+.welcome-gate.open .welcome-subtitle-container {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.95);
 }
 
 .welcome-gate.fade-out {
@@ -527,7 +561,7 @@ html {
     box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
 }
 
-/* Countdown Blocks */
+/* Countdown Section */
 .countdown-section {
     padding: 60px 20px;
     text-align: center;
@@ -577,7 +611,7 @@ html {
     color: var(--text-muted);
 }
 
-/* Footer Section */
+/* Footer Elements */
 .footer {
     text-align: center;
     padding: 80px 20px 40px;
@@ -600,7 +634,7 @@ html {
     margin-top: 15px;
 }
 
-/* Calendar Modal Structure */
+/* Calendar Modal Overrides */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -858,7 +892,7 @@ html {
     transform: translateY(0);
 }
 
-/* Global Gold Override */
+/* Global Gold Overrides */
 .welcome-names,
 .couple-names,
 .section-title,
