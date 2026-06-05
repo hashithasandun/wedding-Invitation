@@ -561,7 +561,7 @@ html {
     box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
 }
 
-/* FIX: Premium Button Styles for the Calendar Action Link */
+/* Premium Button Styles for the Calendar Action Link */
 .btn-calendar {
     background-color: transparent;
     color: var(--accent-gold);
