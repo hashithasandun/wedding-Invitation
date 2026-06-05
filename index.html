@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yama & Nipu's Wedding Invitation</title>
+
+    <!-- Open Graph / WhatsApp Meta Tags -->
+    <meta property="og:title" content="Yama & Nipu - Save the Date">
+    <meta property="og:description"
+        content="We are getting married! You are cordially invited to celebrate our special day with us. 31st of August 2026.">
+    <meta property="og:image" content="WhatsApp Image 2026-06-05 at 11.18.22 AM (1).png">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Welcome Gate / Overlay -->
+    <div id="welcome-gate" class="welcome-gate">
+        <!-- Background Image behind the opening doors -->
+        <div class="welcome-bg-image-wrapper">
+            <img src="WhatsApp Image 2026-06-05 at 11.18.22 AM (1).png" alt="Couple Artwork" class="welcome-bg-image">
+        </div>
+
+        <!-- Left Door -->
+        <div class="door door-left">
+            <div class="door-inner">
+                <div class="welcome-content-left">
+                    <p class="welcome-subtitle">The Wedding of</p>
+                    <h1 class="welcome-names-left">Yama</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Door -->
+        <div class="door door-right">
+            <div class="door-inner">
+                <div class="welcome-content-right">
+                    <p class="welcome-subtitle">&</p>
+                    <h1 class="welcome-names-right">Nipu</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opening trigger button overlay -->
+        <div class="open-trigger-container">
+            <button id="btn-open" class="btn-open">
+                Open Invitation
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="main-content">
+        <!-- Floating Music Control -->
+        <button id="music-toggle" class="music-toggle" aria-label="Toggle Background Music">
+            <i class="fa-solid fa-music"></i>
+        </button>
+
+        <!-- Background Audio -->
+        <audio id="bg-music" loop>
+            <source src="Warm-Memories.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Hero Section -->
+        <section class="hero scroll-reveal">
+            <div class="hero-header">
+                <p class="subtitle">The Wedding of</p>
+                <h1 class="couple-names">Yama & Nipu</h1>
+            </div>
+
+            <div class="celebration-wrapper">
+                <p class="celebration-title">WEDDING CELEBRATION</p>
+                <div class="hero-image-wrapper arch-frame">
+                    <img src="WhatsApp Image 2026-06-05 at 11.18.22 AM (1).png" alt="Yama & Nipu's Wedding Artwork"
+                        class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section class="details scroll-reveal">
+            <div class="card">
+                <h2 class="section-title">Join Us to Celebrate</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <i class="fa-regular fa-calendar-days detail-icon"></i>
+                        <h3>Date</h3>
+                        <p>Monday, August 31st, 2026</p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-regular fa-clock detail-icon"></i>
+                        <h3>Time</h3>
+                        <p>08:00 AM Onwards</p>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-location-dot detail-icon"></i>
+                        <h3>Venue</h3>
+                        <p>Grand Monro Hotel</p>
+                        <p class="sub-venue">Meegoda</p>
+                    </div>
+                </div>
+
+                <a href="https://maps.google.com/?q=Grand+Monro+Hotel+Meegoda" target="_blank" rel="noopener noreferrer"
+                    class="btn-map">
+                    <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+                </a>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section scroll-reveal">
+            <h2 class="section-title">Counting Down the Moments</h2>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <span id="days" class="time-num">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours" class="time-num">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes" class="time-num">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds" class="time-num">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Thank you for being a part of our journey.</p>
+            <p class="signature">Yama & Nipu</p>
+        </footer>
+        <!-- Calendar Popup Modal -->
+        <div id="calendar-modal" class="modal-overlay">
+            <div class="modal-card">
+                <button id="modal-close" class="modal-close" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="modal-icon-wrapper">
+                    <i class="fa-regular fa-calendar-check modal-main-icon"></i>
+                </div>
+                <h3 class="modal-title">Save The Date</h3>
+                <p class="modal-message">Would you like to add Yama & Nipu's Wedding to your Google Calendar so you
+                    don't miss the celebration?</p>
+                <div class="modal-actions">
+                    <a id="btn-add-calendar"
+                        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yama+%26+Nipu%27s+Wedding+Celebration&dates=20260831T023000Z/20260831T123000Z&details=You+are+cordially+invited+to+celebrate+the+wedding+of+Yama+%26+Nipu+at+Grand+Monro+Hotel,+Meegoda.&location=Grand+Monro+Hotel,+Meegoda"
+                        target="_blank" rel="noopener noreferrer" class="btn-confirm">
+                        <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                    </a>
+                    <button id="btn-cancel-modal" class="btn-cancel">Maybe Later</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+</body>
+
+</html>
