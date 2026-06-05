@@ -22,24 +22,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper functions to show/hide modal
     function showModal() {
-        calendarModal.classList.add('show');
+        if (calendarModal) {
+            calendarModal.classList.add('show');
+        }
     }
 
     function hideModal() {
-        calendarModal.classList.remove('show');
+        if (calendarModal) {
+            calendarModal.classList.remove('show');
+        }
     }
 
-    // Modal Close Bindings
-    modalCloseBtn.addEventListener('click', hideModal);
-    btnCancelModal.addEventListener('click', hideModal);
-    btnAddCalendar.addEventListener('click', hideModal); // Close when they click "Add" to prevent stuck overlays
+    // Modal Close Bindings (Safe check to ensure elements exist)
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', hideModal);
+    if (btnCancelModal) btnCancelModal.addEventListener('click', hideModal);
+    
+    // Only bind modal actions if the modal actually exists, avoiding blocking other scripts
+    if (btnAddCalendar && calendarModal) {
+        btnAddCalendar.addEventListener('click', hideModal);
+    }
 
     // Close modal if user clicks outside the modal card
-    calendarModal.addEventListener('click', (e) => {
-        if (e.target === calendarModal) {
-            hideModal();
-        }
-    });
+    if (calendarModal) {
+        calendarModal.addEventListener('click', (e) => {
+            if (e.target === calendarModal) {
+                hideModal();
+            }
+        });
+    }
 
     // 1. Welcome Gate Unlock Action
     btnOpen.addEventListener('click', () => {
@@ -59,8 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
             initScrollReveals();
             startFlowerPetals();
 
-            // Trigger Google Calendar popup modal 1.5 seconds after page loads for great UX flow
-            setTimeout(showModal, 1500);
+            // Trigger Google Calendar popup modal 1.5 seconds after page loads if it exists
+            if (calendarModal) {
+                setTimeout(showModal, 1500);
+            }
         }, 3000);
     });
 
