@@ -199,4 +199,87 @@ document.addEventListener('DOMContentLoaded', () => {
             }, (duration) * 1000);
         }, 300);
     }
+    // --- 5. RSVP LOGIC ---
+    const btnConfirm = document.getElementById('btn-confirm');
+    const btnReject = document.getElementById('btn-reject');
+    const rsvpModal = document.getElementById('rsvp-modal');
+    const closeModal = document.getElementById('close-modal');
+    const rsvpForm = document.getElementById('rsvp-form');
+    const statusInput = document.getElementById('rsvp-status');
+    const groupCount = document.getElementById('group-count');
+    const countInput = document.getElementById('rsvp-count');
+    const btnSubmit = document.getElementById('btn-submit-form');
+
+    // Open Modal for Confirm
+    if (btnConfirm) {
+        btnConfirm.addEventListener('click', () => {
+            if (statusInput) statusInput.value = "Attending";
+            if (groupCount) groupCount.style.display = "block";
+            if (countInput) countInput.setAttribute("required", "true");
+            if (rsvpModal) rsvpModal.classList.add('active');
+        });
+    }
+
+    // Open Modal for Reject
+    if (btnReject) {
+        btnReject.addEventListener('click', () => {
+            if (statusInput) statusInput.value = "Not Attending";
+            if (groupCount) groupCount.style.display = "none";
+            if (countInput) countInput.removeAttribute("required");
+            if (rsvpModal) rsvpModal.classList.add('active');
+        });
+    }
+
+    // Close Modal
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            if (rsvpModal) rsvpModal.classList.remove('active');
+        });
+    }
+
+    // Close on overlay click
+    if (rsvpModal) {
+        rsvpModal.addEventListener('click', (e) => {
+            if (e.target === rsvpModal) {
+                rsvpModal.classList.remove('active');
+            }
+        });
+    }
+
+    // Handle Form Submit to Formspree
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (btnSubmit) {
+                btnSubmit.innerText = "SUBMITTING...";
+                btnSubmit.disabled = true;
+            }
+
+            const formData = new FormData(rsvpForm);
+
+            fetch("https://formspree.io/f/xykqvbpa", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert("Thank you! Your RSVP has been received.");
+                    if (rsvpModal) rsvpModal.classList.remove('active');
+                    rsvpForm.reset();
+                } else {
+                    alert("Oops! There was a problem submitting your form.");
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form.");
+            }).finally(() => {
+                if (btnSubmit) {
+                    btnSubmit.innerText = "SUBMIT DETAILS";
+                    btnSubmit.disabled = false;
+                }
+            });
+        });
+    }
 });
