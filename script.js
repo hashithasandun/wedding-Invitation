@@ -22,57 +22,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper functions to show/hide modal
     function showModal() {
-        calendarModal.classList.add('show');
+        if (calendarModal) calendarModal.classList.add('show');
     }
 
     function hideModal() {
-        calendarModal.classList.remove('show');
+        if (calendarModal) calendarModal.classList.remove('show');
     }
 
     // Modal Close Bindings
-    modalCloseBtn.addEventListener('click', hideModal);
-    btnCancelModal.addEventListener('click', hideModal);
-    btnAddCalendar.addEventListener('click', hideModal); // Close when they click "Add" to prevent stuck overlays
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', hideModal);
+    if (btnCancelModal) btnCancelModal.addEventListener('click', hideModal);
+    if (btnAddCalendar) btnAddCalendar.addEventListener('click', hideModal); // Close when they click "Add" to prevent stuck overlays
 
     // Close modal if user clicks outside the modal card
-    calendarModal.addEventListener('click', (e) => {
-        if (e.target === calendarModal) {
-            hideModal();
-        }
-    });
+    if (calendarModal) {
+        calendarModal.addEventListener('click', (e) => {
+            if (e.target === calendarModal) {
+                hideModal();
+            }
+        });
+    }
 
     // 1. Welcome Gate Unlock Action
-    btnOpen.addEventListener('click', () => {
-        // Try playing background music immediately
-        playAudio();
+    if (btnOpen) {
+        btnOpen.addEventListener('click', () => {
+            // Try playing background music immediately
+            playAudio();
 
-        // Slide open the doors
-        welcomeGate.classList.add('open');
+            // Slide open the doors
+            if (welcomeGate) welcomeGate.classList.add('open');
 
-        // Wait 3 seconds to let the doors open and focus the image with a WOW look, then fade overlay & reveal invitation
-        setTimeout(() => {
-            welcomeGate.classList.add('fade-out');
-            mainContent.classList.add('reveal');
+            // Wait 3 seconds to let the doors open and focus the image with a WOW look, then fade overlay & reveal invitation
+            setTimeout(() => {
+                if (welcomeGate) welcomeGate.classList.add('fade-out');
+                if (mainContent) mainContent.classList.add('reveal');
 
-            // Start countdown and setup scroll reveals
-            initCountdown();
-            initScrollReveals();
-            startFlowerPetals();
+                // Start countdown and setup scroll reveals
+                initCountdown();
+                initScrollReveals();
+                startFlowerPetals();
 
-            // Trigger Google Calendar popup modal 1.5 seconds after page loads for great UX flow
-            setTimeout(showModal, 1500);
-        }, 3000);
-    });
+                // Trigger Google Calendar popup modal 1.5 seconds after page loads for great UX flow
+                if (calendarModal) {
+                    setTimeout(showModal, 1500);
+                }
+            }, 3000);
+        });
+    }
 
     // 2. Music Player & Toggle Controls
     let isPlaying = false;
 
     function playAudio() {
+        if (!bgMusic) return;
         bgMusic.play()
             .then(() => {
                 isPlaying = true;
-                musicToggle.classList.add('playing');
-                musicToggle.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                if (musicToggle) {
+                    musicToggle.classList.add('playing');
+                    musicToggle.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                }
             })
             .catch(error => {
                 console.log('Audio autoplay blocked or failed:', error);
@@ -80,19 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function pauseAudio() {
+        if (!bgMusic) return;
         bgMusic.pause();
         isPlaying = false;
-        musicToggle.classList.remove('playing');
-        musicToggle.innerHTML = '<i class="fa-solid fa-music"></i>';
+        if (musicToggle) {
+            musicToggle.classList.remove('playing');
+            musicToggle.innerHTML = '<i class="fa-solid fa-music"></i>';
+        }
     }
 
-    musicToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            pauseAudio();
-        } else {
-            playAudio();
-        }
-    });
+    if (musicToggle) {
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        });
+    }
 
     // 3. Countdown Timer Logic
     let countdownInterval;
@@ -108,10 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (distance < 0) {
             clearInterval(countdownInterval);
-            daysEl.textContent = '00';
-            hoursEl.textContent = '00';
-            minutesEl.textContent = '00';
-            secondsEl.textContent = '00';
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
             return;
         }
 
@@ -120,10 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        daysEl.textContent = String(days).padStart(2, '0');
-        hoursEl.textContent = String(hours).padStart(2, '0');
-        minutesEl.textContent = String(minutes).padStart(2, '0');
-        secondsEl.textContent = String(seconds).padStart(2, '0');
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
     }
 
     // 4. Scroll Reveal Animations (using Intersection Observer)
